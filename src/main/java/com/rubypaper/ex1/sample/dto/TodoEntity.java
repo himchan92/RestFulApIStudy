@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,5 +33,5 @@ public class TodoEntity {
     @Column(length = 500, nullable = false)
     private String writer;
 
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 }
