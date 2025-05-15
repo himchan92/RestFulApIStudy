@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -15,6 +16,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @ToString
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "tbl_todos")
@@ -31,4 +33,16 @@ public class TodoEntity {
     private String writer;
 
     private LocalDate dueDate;
+
+    public void changeTitle(String title) {
+        this.title = title;
+    }
+
+    public void changeWriter(String writer) {
+        this.writer = writer;
+    }
+
+    public void changeDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
 }
