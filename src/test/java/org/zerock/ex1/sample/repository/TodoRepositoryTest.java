@@ -1,12 +1,17 @@
 package org.zerock.ex1.sample.repository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -100,5 +105,32 @@ class TodoRepositoryTest {
         result.ifPresent(todoEntity -> {
             todoRepository.delete(todoEntity);
         });
+    }
+
+    @Test
+    public void testPaging() {
+        // Pageable : 페이징 지원
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").descending()); //mno 기준 0 ~ 10 내림차순 페이징
+
+        Page<TodoEntity> result = todoRepository.findAll(pageable);
+
+        System.out.println(result.getTotalPages());
+
+        System.out.println(result.getTotalElements());
+
+        List<TodoEntity> todoEntityList = result.getContent();
+
+        todoEntityList.forEach(todoEntity -> {
+            System.out.println(todoEntity);
+        });
+    }
+
+    @Test
+    public void testListAll() {
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
+
+        Page<TodoEntity> result = todoRepository.listAll(pageable);
+
+        System.out.println(result.getContent());
     }
 }
