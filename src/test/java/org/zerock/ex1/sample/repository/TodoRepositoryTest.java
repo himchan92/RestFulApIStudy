@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.ex1.sample.entity.TodoEntity;
@@ -67,6 +68,39 @@ class TodoRepositoryTest {
 
         result.ifPresent(todoEntity -> {
             System.out.println(todoEntity);
+        });
+    }
+
+    @Test
+    @Transactional
+    @Commit
+    public void testUpdateDirtyCheck() {
+        Long mno = 58L;
+
+        Optional<TodoEntity> result = todoRepository.findById(mno);
+
+        TodoEntity todoEntity = result.get();
+
+        System.out.println("OLD: " + todoEntity);
+
+        todoEntity.changeTitle("Change Title..." + Math.random());
+        todoEntity.changeWriter("Change Writer..." + Math.random());
+
+        System.out.println("Changed: " +todoEntity);
+
+        //todoRepository.save(todoEntity); // @Transactional 없으면 별도 save 호출안할시 실제 DB반영안된고 영속성컨텍스트에 담겨있음
+    }
+
+    @Test
+    @Transactional
+    @Commit
+    public void testDelete() {
+        Long mno = 101L;
+
+        Optional<TodoEntity> result = todoRepository.findById(mno);
+
+        result.ifPresent(todoEntity -> {
+            todoRepository.delete(todoEntity);
         });
     }
 }
