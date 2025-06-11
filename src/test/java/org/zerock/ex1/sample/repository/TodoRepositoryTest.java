@@ -124,4 +124,30 @@ class TodoRepositoryTest {
             System.out.println(todoEntity);
         });
     }
+
+    @Test
+    public void testListAll() {
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
+
+        Page<TodoEntity> result = todoRepository.listAll(pageable);
+
+        System.out.println(result.getContent());
+    }
+
+    @Test
+    public void testSearch1() {
+        //페이징처리 : 0 ~ 10 mno 기준 내림차순
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
+
+        Page<TodoEntity> result = todoRepository.search1(pageable);
+
+        System.out.println(result.getTotalPages());
+        System.out.println(result.getTotalElements());
+
+        List<TodoEntity> todoEntityList = result.getContent();
+
+        todoEntityList.forEach(todoEntity -> {
+            System.out.println(todoEntity);
+        });
+    }
 }
