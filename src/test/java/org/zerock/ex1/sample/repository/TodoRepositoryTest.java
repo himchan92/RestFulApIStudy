@@ -1,0 +1,72 @@
+package org.zerock.ex1.sample.repository;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.zerock.ex1.sample.entity.TodoEntity;
+
+import java.time.LocalDate;
+import java.util.Optional;
+
+@DataJpaTest //SpringBootTest와 달리 엔티티 같은 DB 부분만 실행
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Transactional(propagation = Propagation.NOT_SUPPORTED)
+class TodoRepositoryTest {
+
+    @Autowired
+    private TodoRepository todoRepository;
+
+    @Test
+    public void testInsert() {
+        TodoEntity todoEntity = TodoEntity.builder()
+                .title("부트 공부")
+                .writer("user00")
+                .dueDate(LocalDate.of(2025,6,11))
+                .build();
+
+        todoRepository.save(todoEntity); //저장
+
+        System.out.println("New TodoEntity MNO: " + todoEntity.getMno());
+    }
+
+    @Test
+    public void testInsertDummies() {
+        for(int i = 0; i < 100; i++) {
+            TodoEntity todoEntity = TodoEntity.builder()
+                    .title("Test Todo..." + i)
+                    .writer("tester" + i)
+                    .dueDate(LocalDate.of(2025,6,11))
+                    .build();
+
+            todoRepository.save(todoEntity);
+
+            System.out.println("New TodoEntity MNO: " + todoEntity.getMno());
+        }
+    }
+
+    @Test
+    public void testRead() {
+        Long mno = 58L;
+
+        Optional<TodoEntity> result = todoRepository.findById(mno);
+
+        result.ifPresent(todoEntity -> {
+            System.out.println(todoEntity);
+        });
+    }
+
+    @Test
+    @Transactional //한트랜젝션 수행설정으로 동일 쿼리 중복수행안함
+    public void testRead2() {
+        Long mno = 58L;
+
+        Optional<TodoEntity> result = todoRepository.findById(mno);
+
+        result.ifPresent(todoEntity -> {
+            System.out.println(todoEntity);
+        });
+    }
+}
