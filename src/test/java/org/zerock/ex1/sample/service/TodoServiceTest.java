@@ -32,4 +32,11 @@ class TodoServiceTest {
 
         System.out.println(todoDTO);
     }
+
+    @Test
+    public void testRemove() {
+        Long mno = 3L;
+
+        todoService.remove(mno);
+    }
 }

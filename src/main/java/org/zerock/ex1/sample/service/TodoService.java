@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.ex1.sample.dto.TodoDTO;
 import org.zerock.ex1.sample.entity.TodoEntity;
+import org.zerock.ex1.sample.exception.EntityNotFoundException;
 import org.zerock.ex1.sample.repository.TodoRepository;
 
 @Service
@@ -31,8 +32,18 @@ public class TodoService {
     public TodoDTO read(Long mno) {
         Optional<TodoDTO> result = todoRepository.getDTO(mno);
 
-        TodoDTO todoDTO = result.orElseThrow();
+        TodoDTO todoDTO = result.orElseThrow(() -> new EntityNotFoundException("Todo " + mno + " not found"));
 
         return todoDTO;
+    }
+
+    public void remove(Long mno) {
+        Optional<TodoEntity> result = todoRepository.findById(mno);
+
+        TodoEntity todoEntity = result.orElseThrow(
+            () -> new EntityNotFoundException("Todo " + mno + " not found")
+        );
+
+        todoRepository.delete(todoEntity);
     }
 }
