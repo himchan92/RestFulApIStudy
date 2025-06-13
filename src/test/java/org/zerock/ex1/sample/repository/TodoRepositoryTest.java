@@ -162,4 +162,21 @@ class TodoRepositoryTest {
             System.out.println(todoDTO);
         });
     }
+
+    @Test
+    public void testSearchDTO() {
+        Pageable pageable = PageRequest.of(0, 1, Sort.by("mno").descending());
+
+        Page<TodoDTO> result = todoRepository.searchDTO(pageable);
+
+        System.out.println(result.getTotalPages());
+
+        System.out.println(result.getTotalElements());
+
+        List<TodoDTO> dtoList = result.getContent();
+
+        dtoList.forEach(todoDTO -> {
+            System.out.println(todoDTO);
+        });
+    }
 }
