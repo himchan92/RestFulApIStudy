@@ -46,4 +46,16 @@ public class TodoService {
 
         todoRepository.delete(todoEntity);
     }
+
+    public TodoDTO modify(TodoDTO todoDTO) {
+        Optional<TodoEntity> result = todoRepository.findById(todoDTO.getMno());
+
+        TodoEntity todoEntity = result.orElseThrow(() -> new EntityNotFoundException("Todo " + todoDTO.getMno() + " not found"));
+
+        todoEntity.changeTitle(todoDTO.getTitle());
+        todoEntity.changeWriter(todoDTO.getWriter());
+        todoEntity.changeDueDate(todoDTO.getDueDate());
+
+        return new TodoDTO(todoEntity);
+    }
 }

@@ -39,4 +39,15 @@ class TodoServiceTest {
 
         todoService.remove(mno);
     }
+
+    @Test
+    public void testModify() {
+        TodoDTO todoDTO = new TodoDTO();
+        todoDTO.setMno(102L);
+        todoDTO.setTitle("수정된 제목");
+        todoDTO.setWriter("fix1");
+        todoDTO.setDueDate(LocalDate.now());
+
+        todoService.modify(todoDTO);
+    }
 }
