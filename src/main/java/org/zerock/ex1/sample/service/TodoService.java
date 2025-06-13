@@ -4,8 +4,12 @@ import java.util.Optional;
 import javax.swing.text.html.Option;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.ex1.sample.dto.PageRequestDTO;
 import org.zerock.ex1.sample.dto.TodoDTO;
 import org.zerock.ex1.sample.entity.TodoEntity;
 import org.zerock.ex1.sample.exception.EntityNotFoundException;
@@ -57,5 +61,12 @@ public class TodoService {
         todoEntity.changeDueDate(todoDTO.getDueDate());
 
         return new TodoDTO(todoEntity);
+    }
+
+    public Page<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
+        Sort sort = Sort.by("mno").descending();
+        Pageable pageable = pageRequestDTO.getPageable(sort);
+
+        return todoRepository.searchDTO(pageable);
     }
 }

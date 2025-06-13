@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.zerock.ex1.sample.dto.PageRequestDTO;
 import org.zerock.ex1.sample.dto.TodoDTO;
 
 @SpringBootTest
@@ -49,5 +51,17 @@ class TodoServiceTest {
         todoDTO.setDueDate(LocalDate.now());
 
         todoService.modify(todoDTO);
+    }
+
+    @Test
+    public void testList() {
+        PageRequestDTO pageRequestDTO = new PageRequestDTO();
+        Page<TodoDTO> result = todoService.getList(pageRequestDTO);
+
+        System.out.println("PREV: " + result.previousPageable());
+        System.out.println("NEXT: " + result.nextPageable());
+        System.out.println("TOTAL: " + result.getTotalElements());
+
+        result.getContent().forEach(todoDTO -> System.out.println(todoDTO));
     }
 }
