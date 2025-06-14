@@ -15,6 +15,6 @@ public interface TodoRepository extends JpaRepository<org.zerock.ex1.entity.Todo
     @Query("select t from TodoEntity t ")
     Page<org.zerock.ex1.entity.TodoEntity> listAll(Pageable pageable);
 
-    @Query("select t from TodoEntity t where t.mno = :mno")
+    @Query("select new org.zerock.ex1.dto.TodoDTO(t) from TodoEntity t where t.mno = :mno")
     Optional<TodoDTO> getDTO(@Param("mno") Long mno);
 }
