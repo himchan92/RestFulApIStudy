@@ -1,12 +1,12 @@
-package org.zerock.ex1.sample.service;
+package org.zerock.ex1.service;
 
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
-import org.zerock.ex1.sample.dto.PageRequestDTO;
-import org.zerock.ex1.sample.dto.TodoDTO;
+import org.zerock.ex1.dto.PageRequestDTO;
+import org.zerock.ex1.dto.TodoDTO;
 
 @SpringBootTest
 class TodoServiceTest {

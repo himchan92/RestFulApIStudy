@@ -1,4 +1,4 @@
-package org.zerock.ex1.sample.controller;
+package org.zerock.ex1.controller;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;

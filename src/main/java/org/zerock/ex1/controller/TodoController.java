@@ -1,4 +1,4 @@
-package org.zerock.ex1.sample.controller;
+package org.zerock.ex1.controller;
 
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.zerock.ex1.sample.dto.PageRequestDTO;
-import org.zerock.ex1.sample.dto.TodoDTO;
-import org.zerock.ex1.sample.service.TodoService;
+import org.zerock.ex1.dto.PageRequestDTO;
+import org.zerock.ex1.dto.TodoDTO;
+import org.zerock.ex1.service.TodoService;
 
 @RestController
 @Log4j2

@@ -1,11 +1,11 @@
-package org.zerock.ex1.sample.dto;
+package org.zerock.ex1.dto;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.zerock.ex1.sample.entity.TodoEntity;
+import org.zerock.ex1.entity.TodoEntity;
 
 @Data
 @NoArgsConstructor

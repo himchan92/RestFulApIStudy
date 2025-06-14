@@ -1,4 +1,4 @@
-package org.zerock.ex1.sample.service;
+package org.zerock.ex1.service;
 
 import java.util.Optional;
 import javax.swing.text.html.Option;
@@ -9,11 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.zerock.ex1.sample.dto.PageRequestDTO;
-import org.zerock.ex1.sample.dto.TodoDTO;
-import org.zerock.ex1.sample.entity.TodoEntity;
-import org.zerock.ex1.sample.exception.EntityNotFoundException;
-import org.zerock.ex1.sample.repository.TodoRepository;
+import org.zerock.ex1.dto.PageRequestDTO;
+import org.zerock.ex1.dto.TodoDTO;
+import org.zerock.ex1.entity.TodoEntity;
+import org.zerock.ex1.exception.EntityNotFoundException;
+import org.zerock.ex1.repository.TodoRepository;
 
 @Service
 @Transactional

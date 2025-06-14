@@ -1,4 +1,4 @@
-package org.zerock.ex1.sample.controller;
+package org.zerock.ex1.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;

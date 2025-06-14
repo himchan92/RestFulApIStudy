@@ -1,4 +1,4 @@
-package org.zerock.ex1.sample.repository;
+package org.zerock.ex1.repository;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -12,8 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.zerock.ex1.sample.dto.TodoDTO;
-import org.zerock.ex1.sample.entity.TodoEntity;
+import org.zerock.ex1.dto.TodoDTO;
+import org.zerock.ex1.entity.TodoEntity;
 
 import java.time.LocalDate;
 import java.util.Optional;

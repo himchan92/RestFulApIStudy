@@ -1,4 +1,4 @@
-package org.zerock.ex1.sample.dto;
+package org.zerock.ex1.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

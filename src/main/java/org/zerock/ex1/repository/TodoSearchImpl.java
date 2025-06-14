@@ -1,4 +1,4 @@
-package org.zerock.ex1.sample.repository;
+package org.zerock.ex1.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
@@ -8,10 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
-import org.springframework.expression.spel.ast.Projection;
-import org.zerock.ex1.sample.dto.TodoDTO;
-import org.zerock.ex1.sample.entity.QTodoEntity;
-import org.zerock.ex1.sample.entity.TodoEntity;
+import org.zerock.ex1.dto.TodoDTO;
+import org.zerock.ex1.entity.TodoEntity;
+import org.zerock.ex1.entity.QTodoEntity;
 
 @Log4j2
 public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSearch {

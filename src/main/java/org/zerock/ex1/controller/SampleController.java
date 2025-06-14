@@ -1,10 +1,10 @@
-package org.zerock.ex1.sample.controller;
+package org.zerock.ex1.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.zerock.ex1.sample.service.SampleService;
+import org.zerock.ex1.service.SampleService;
 
 @Log4j2
 @RestController

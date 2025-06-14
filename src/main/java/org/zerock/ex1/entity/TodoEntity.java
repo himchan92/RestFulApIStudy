@@ -1,4 +1,4 @@
-package org.zerock.ex1.sample.entity;
+package org.zerock.ex1.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

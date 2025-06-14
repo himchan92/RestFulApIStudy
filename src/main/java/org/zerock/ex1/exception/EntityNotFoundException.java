@@ -1,4 +1,4 @@
-package org.zerock.ex1.sample.exception;
+package org.zerock.ex1.exception;
 
 public class EntityNotFoundException extends RuntimeException {
 
