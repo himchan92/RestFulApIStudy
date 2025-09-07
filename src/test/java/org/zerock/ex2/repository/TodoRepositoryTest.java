@@ -131,4 +131,11 @@ class TodoRepositoryTest {
 
         log.info(result.getContent());
     }
+
+    @Test
+    public void testSearch1() {
+        PageRequest pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
+
+        Page<TodoEntity> result = todoRepository.search1(pageable);
+    }
 }
