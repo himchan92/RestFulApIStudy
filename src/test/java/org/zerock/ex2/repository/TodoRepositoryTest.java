@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -118,5 +121,14 @@ class TodoRepositoryTest {
         Long mno = 100L;
 
         todoRepository.deleteById(mno); //ID건 삭제 지원
+    }
+
+    @Test
+    public void testListAll() {
+        PageRequest pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
+
+        Page<TodoEntity> result = todoRepository.findAll(pageable);
+
+        log.info(result.getContent());
     }
 }
