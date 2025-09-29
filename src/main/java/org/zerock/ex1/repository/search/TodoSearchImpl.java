@@ -1,11 +1,13 @@
 package org.zerock.ex1.repository.search;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import org.zerock.ex1.dto.TodoDTO;
 import org.zerock.ex1.entity.QTodoEntity;
 import org.zerock.ex1.entity.TodoEntity;
 
@@ -35,5 +37,24 @@ public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSea
         long count = query.fetchCount();
 
         return new PageImpl<>(entityList, pageable, count);
+    }
+
+    @Override
+    public Page<TodoDTO> searchDTO(Pageable pageable) {
+        QTodoEntity todoEntity = QTodoEntity.todoEntity;
+
+        JPQLQuery<TodoEntity> query = from(todoEntity);
+
+        query.where(todoEntity.mno.gt(0L));
+
+        getQuerydsl().applyPagination(pageable, query);
+
+        JPQLQuery<TodoDTO> dtoQuery = query.select(Projections.constructor(TodoDTO.class, todoEntity));
+
+        List<TodoDTO> dtoList = dtoQuery.fetch();
+
+        long count = dtoQuery.fetchCount();
+
+        return new PageImpl<>(dtoList, pageable, count);
     }
 }

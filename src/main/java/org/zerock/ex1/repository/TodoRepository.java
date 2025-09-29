@@ -5,8 +5,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.zerock.ex1.dto.TodoDTO;
 import org.zerock.ex1.entity.TodoEntity;
 import org.zerock.ex1.repository.search.TodoSearch;
+
+import java.util.Optional;
 
 public interface TodoRepository extends JpaRepository<TodoEntity, Long>, TodoSearch {
 
@@ -15,6 +18,9 @@ public interface TodoRepository extends JpaRepository<TodoEntity, Long>, TodoSea
             nativeQuery = true //DB 함수 허용여부
     )
     Page<TodoEntity> listAll(Pageable pageable);
+
+    @Query("select t from TodoEntity t where t.mno = :mno")
+    Optional<TodoDTO> getDTO(@Param("mno") Long mno);
 
     //@Param 지정해서 변수명 지정
     //파라미터는 앞에 : 붙여 매핑
