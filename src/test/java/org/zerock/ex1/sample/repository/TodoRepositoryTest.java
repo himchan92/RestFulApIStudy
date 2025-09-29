@@ -11,7 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.zerock.ex1.sample.entity.TodoEntity;
+import org.zerock.ex1.entity.TodoEntity;
+import org.zerock.ex1.repository.TodoRepository;
 
 import java.time.LocalDate;
 import java.util.List;

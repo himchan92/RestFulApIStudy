@@ -1,4 +1,4 @@
-package org.zerock.ex1.sample.repository.search;
+package org.zerock.ex1.repository.search;
 
 import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.log4j.Log4j2;
@@ -6,8 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
-import org.zerock.ex1.sample.entity.QTodoEntity;
-import org.zerock.ex1.sample.entity.TodoEntity;
+import org.zerock.ex1.entity.QTodoEntity;
+import org.zerock.ex1.entity.TodoEntity;
 
 import java.util.List;
 
