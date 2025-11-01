@@ -24,7 +24,7 @@ public class MemberService {
     //TODO: 사용자 정보가져온 후 암호화 가능한값인지 체크 후 반환
     public MemberDTO read(String mid, String mpw) {
         Optional<MemberEntity> result = memberRepository.findById(mid);
-        MemberEntity memberEntity = result.orElseThrow(MemberExceptions.NOT_FOUND::get);
+        MemberEntity memberEntity = result.orElseThrow(MemberExceptions.BAD_CREDENTIALS::get);
 
         if(!passwordEncoder.matches(mpw, memberEntity.getMpw())) {
             throw MemberExceptions.BAD_CREDENTIALS.get();
