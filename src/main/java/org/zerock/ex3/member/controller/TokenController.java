@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zerock.ex3.member.dto.MemberDTO;
+import org.zerock.ex3.member.security.util.JWTUtil;
 import org.zerock.ex3.member.service.MemberService;
 
 import java.util.Map;
@@ -20,6 +21,8 @@ public class TokenController {
 
     private final MemberService memberService;
 
+    private final JWTUtil jwtUtil;
+
     @PostMapping("/make")
     public ResponseEntity<Map<String, String>> makeToken(@RequestBody MemberDTO memberDTO) {
         log.info("make token............");
@@ -29,6 +32,16 @@ public class TokenController {
 
         log.info(memberDTOResult);
 
-        return null;
+        String mid = memberDTOResult.getMid();
+
+        Map<String, Object> dataMap = memberDTOResult.getDateMap();
+
+        String assessToken = jwtUtil.createToken(dataMap, 10);
+        String refreshToken = jwtUtil.createToken(Map.of("mid", mid), 60 * 24 * 7);
+
+        log.info("assessToken: " + assessToken);
+        log.info("refreshToken: " + refreshToken);
+
+        return ResponseEntity.ok(Map.of("assessToken", assessToken, "refreshToken", refreshToken));
     }
 }
