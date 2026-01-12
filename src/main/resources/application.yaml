@@ -8,3 +8,13 @@ spring:
     hikari:
       minimum-idle: 2
       maximum-pool-size: 5
+
+  ## DDL Generation
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MariaDBDialect
