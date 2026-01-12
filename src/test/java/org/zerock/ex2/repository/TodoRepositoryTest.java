@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.ex2.entity.TodoDTO;
 import org.zerock.ex2.entity.TodoEntity;
 
 import java.time.LocalDate;
@@ -150,6 +151,17 @@ class TodoRepositoryTest {
 
         todoEntityList.forEach(todoEntity -> {
             System.out.println(todoEntity);
+        });
+    }
+
+    @Test
+    public void testGetTodoDTO() {
+        Long mno = 59L;
+
+        Optional<TodoDTO> result = todoRepository.getDTO(mno);
+
+        result.ifPresent(todoDTO -> {
+            System.out.println(todoDTO);
         });
     }
 }
