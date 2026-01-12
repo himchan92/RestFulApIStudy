@@ -1,5 +1,7 @@
 package org.zerock.ex2.entity;
 
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,10 +13,13 @@ public class TodoDTO {
 
     private Long mno;
 
+    @NotEmpty
     private String title;
 
+    @NotEmpty
     private String writer;
 
+    @FutureOrPresent
     private LocalDate dueDate;
 
     public TodoDTO(TodoEntity todoEntity) {

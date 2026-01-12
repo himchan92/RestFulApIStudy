@@ -43,8 +43,9 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
 
-	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
 	annotationProcessor(
 			"jakarta.persistence:jakarta.persistence-api",
 			"jakarta.annotation:jakarta.annotation-api",
