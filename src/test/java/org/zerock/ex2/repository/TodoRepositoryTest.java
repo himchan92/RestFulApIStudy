@@ -69,4 +69,43 @@ class TodoRepositoryTest {
             System.out.println(todoEntity);
         });
     }
+
+    @Test
+    @Transactional // 변경감지 시 save 호출안해도되고 없으면 save 필요
+    public void testUpdateDirtyCheck() {
+        Long mno = 58L;
+
+        Optional<TodoEntity> result = todoRepository.findById(mno);
+
+        TodoEntity todoEntity = result.get();
+
+        System.out.println("OLD : " + todoEntity);
+
+        todoEntity.changeTitle("Change Title..." + Math.random());
+        todoEntity.changeWriter("Change Writer..." + Math.random());
+
+        System.out.println("Changed : " + todoEntity);
+    }
+
+    @Test
+    @Transactional
+    public void testDelete() {
+        Long mno = 101L;
+
+        Optional<TodoEntity> result = todoRepository.findById(mno);
+
+        result.ifPresent(todoEntity -> {
+            todoRepository.delete(todoEntity);
+        });
+    }
+
+    @Test
+    @Transactional
+    public void testDeleteById() {
+
+        //삭제 전 확인
+        Long mno = 100L;
+
+        todoRepository.deleteById(mno);
+    }
 }
