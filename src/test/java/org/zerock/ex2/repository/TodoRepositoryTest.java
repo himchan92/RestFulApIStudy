@@ -4,11 +4,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.ex2.entity.TodoEntity;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @DataJpaTest
@@ -107,5 +111,30 @@ class TodoRepositoryTest {
         Long mno = 100L;
 
         todoRepository.deleteById(mno);
+    }
+
+    @Test
+    public void testPaging() {
+        PageRequest pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
+
+        Page<TodoEntity> result = todoRepository.findAll(pageable);
+
+        System.out.println(result.getTotalPages());
+        System.out.println(result.getTotalElements());
+
+        List<TodoEntity> todoEntityList = result.getContent();
+
+        todoEntityList.forEach(todoEntity -> {
+            System.out.println(todoEntity);
+        });
+    }
+
+    @Test
+    public void testListAll() {
+        PageRequest pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
+
+        Page<TodoEntity> result = todoRepository.listAll(pageable);
+
+        System.out.println(result.getContent());
     }
 }
