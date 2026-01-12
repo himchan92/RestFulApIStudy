@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.zerock.ex2.entity.TodoEntity;
 
-public interface TodoRepository extends JpaRepository<TodoEntity, Long> {
+public interface TodoRepository extends JpaRepository<TodoEntity, Long>, TodoSearch {
 
     @Query("select t from TodoEntity t ")
     Page<TodoEntity> listAll(Pageable pageable);
