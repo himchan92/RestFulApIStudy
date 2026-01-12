@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/bootdb2
+    username: bootdb2user
+    password: bootdb2user
+
+    hikari:
+      minimum-idle: 2
+      maximum-pool-size: 5
